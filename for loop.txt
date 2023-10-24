@@ -1,0 +1,22 @@
+find -r -l '' * > tmp; while read p; 
+do grep -l 'string2' $p; done < tmp; rm tmp
+
+find -r-l '*,' 
+
+
+    void bad_character_rule(char *pattern, int pattern_length, int *bad_char)  
+    {  
+       int i;  
+       for (i = 0; i < NO_OF_CHARS; i++)  
+          bad_char[i] = -1;  
+       for (i = 0; i < pattern_length; i++)  
+          bad_char[(int) pattern[i]] = i;  
+    }  
+
+filename="document.txt"
+
+if [[ "$filename" =~ \,$ ]]; then
+  echo "Filename has a .txt extension"
+else
+  echo "Filename does not have a .txt extension"
+fi  

@@ -1,0 +1,53 @@
+first need to build a API with django to read from DB 
+having jason requst to show this API thats read from DB 
+using post method 
+
+after that need to complete the assigment by having the program thats read from DB and collect every transaction and classify every transaction in specific field 
+
+
+class ProfileFetchView(APIView):
+   
+    def post(self, request):
+        try:
+            if 'name' not in request.data:
+                data = {
+                'message': 'Please provide valid data',
+                'status': 'error',
+               
+                }
+                return JsonResponse(data, status=status.HTTP_400_BAD_REQUEST)
+            obj_data = Profile.objects.get(name=request.data['name'])
+            obj_data = ProfileSerializer(obj_data).data
+            data = {
+                'message': 'Profile created successfully',
+                'status': 'success',
+                "data":obj_data
+               
+            }
+            return JsonResponse(data)
+        except:
+            data = {
+                'message': 'Failed to create post',
+                'status': 'error',
+               
+            }
+            return JsonResponse(data, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+this is url path
+path('profilefetcher',ProfileFetchView.as_view(),name='profile-fetch')
+
+
+
+
+this is curl request that you need to import in postman
+
+curl --location --request POST 'http://127.0.0.1:8000/api/profilefetcher' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"Tester1"
+}'
+
+
+

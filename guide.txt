@@ -1,0 +1,27 @@
+pip install virtualenv
+
+virtualenv env
+source env/Scripts/activate
+pip install django djangorestframework
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+python manage.py createsuperuser
+No5816192
+
+curl --location --request POST 'http://127.0.0.1:8000/api/profile/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Newuser11",
+    "number": "09999092344",
+    "username": "newuser1"
+}'
+
+obj_data = Profile.objects.get(id=obj.pk)
+            obj_data = ProfileSerializer(obj_data).data
+            data = {
+                'message': 'Profile created successfully',
+                'status': 'success',
+                "data":obj_data
+               
+            }
